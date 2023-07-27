@@ -11,7 +11,7 @@
     };
 
     hive = {
-      url = "github:hoppla20/hive";
+      url = "github:hoppla20/hive/implement-modules-and-profiles";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         haumea.follows = "std/dmerge/haumea";
@@ -39,10 +39,14 @@
       cellBlocks = [
         (std.blockTypes.nixago "configs")
         (std.blockTypes.devshells "shells")
+        hive.blockTypes.nixosModules
+        hive.blockTypes.nixosProfiles
         hive.blockTypes.nixosConfigurations
       ];
     }
     {
+      nixosModules = hive.collect self "nixosModules";
+      nixosProfiles = hive.collect self "nixosProfiles";
       nixosConfigurations = hive.collect self "nixosConfigurations";
     };
 }
