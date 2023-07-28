@@ -38,6 +38,12 @@
     nixpkgsConfig = {
       allowUnfree = true;
     };
+
+    collect =
+      hive.collect
+      // {
+        renamer = cell: target: "${cell}_${target}";
+      };
   in
     hive.growOn {
       inherit inputs nixpkgsConfig;
@@ -56,8 +62,8 @@
       ];
     })
     {
-      nixosModules = hive.collect self "nixosModules";
-      nixosProfiles = hive.collect self "nixosProfiles";
+      nixosModules = collect self "nixosModules";
+      nixosProfiles = collect self "nixosProfiles";
     }
     (hive.grow {
       inherit nixpkgsConfig;
@@ -68,6 +74,6 @@
       ];
     })
     {
-      nixosConfigurations = hive.collect self "nixosConfigurations";
+      nixosConfigurations = collect self "nixosConfigurations";
     };
 }

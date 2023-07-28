@@ -2,8 +2,8 @@
   inputs,
   cell,
 }: {
-  default = {...}: {
-    bee.modules.sshExample-default = {
+  default = targetName: {...}: {
+    bee.modules.${targetName "default"} = {
       enable = true;
       openFirewall = true;
     };
