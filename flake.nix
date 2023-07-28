@@ -53,12 +53,21 @@
       cellBlocks = [
         hive.blockTypes.nixosModules
         hive.blockTypes.nixosProfiles
-        hive.blockTypes.nixosConfigurations
       ];
     })
     {
       nixosModules = hive.collect self "nixosModules";
       nixosProfiles = hive.collect self "nixosProfiles";
+    }
+    (hive.grow {
+      inherit nixpkgsConfig;
+      inputs = inputs // {inherit (self) nixosModules nixosProfiles;};
+      cellsFrom = incl ./nix ["core"];
+      cellBlocks = [
+        hive.blockTypes.nixosConfigurations
+      ];
+    })
+    {
       nixosConfigurations = hive.collect self "nixosConfigurations";
     };
 }

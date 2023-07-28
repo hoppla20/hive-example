@@ -9,12 +9,13 @@
       home = inputs.home-manager;
 
       extraProfiles = [
-        inputs.cells.sshExample.nixosProfiles.default
+        inputs.nixosProfiles.sshExample-default
       ];
       extraModules = [
-        inputs.cells.sshExample.nixosModules.default
+        inputs.nixosModules.sshExample-default
       ];
-      profiles = ["core-default"];
+
+      profiles = ["core-default" "sshExample-default"];
     };
   };
 }
