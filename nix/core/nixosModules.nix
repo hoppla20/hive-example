@@ -2,26 +2,21 @@
   inputs,
   cell,
 }: {
-  default = {
+  default = moduleName: {
     lib,
     config,
     ...
   }: let
-    cfg = config.bee.modules.core;
+    cfg = config.bee.modules.${moduleName};
   in {
-    options.bee.modules.core = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-
+    options = {
       package = lib.mkOption {
         type = lib.types.package;
         default = config.bee.pkgs.hello;
       };
     };
 
-    config = lib.mkIf cfg.enable {
+    config = {
       environment.systemPackages = [cfg.package];
     };
   };

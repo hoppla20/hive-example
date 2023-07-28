@@ -3,6 +3,6 @@
   cell,
 }: {
   default = {...}: {
-    bee.modules.core.enable = true;
+    bee.modules.core-default.enable = true;
   };
 }

@@ -3,7 +3,7 @@
   cell,
 }: {
   default = {...}: {
-    bee.modules.sshExample = {
+    bee.modules.sshExample-default = {
       enable = true;
       openFirewall = true;
     };

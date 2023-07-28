@@ -2,27 +2,22 @@
   inputs,
   cell,
 }: {
-  default = {
+  default = moduleName: {
     lib,
     config,
     options,
     ...
   }: let
-    cfg = config.bee.modules.sshExample;
+    cfg = config.bee.modules.${moduleName};
   in {
-    options.bee.modules.sshExample = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-
+    options = {
       openFirewall = lib.mkOption {
         type = lib.types.bool;
         default = false;
       };
     };
 
-    config = lib.mkIf cfg.enable {
+    config = {
       services.openssh = {
         enable = true;
         openFirewall = cfg.openFirewall;
