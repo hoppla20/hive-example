@@ -227,11 +227,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1690502431,
-        "narHash": "sha256-CJp9t0OJZjonj1eN6UT+85DhHjdlSlbIAVv1lvOBWM0=",
+        "lastModified": 1690548015,
+        "narHash": "sha256-QjY2voflUtuTgR9XT18qLjr8irIFdqrhPg+/aqK8XGU=",
         "owner": "hoppla20",
         "repo": "hive",
-        "rev": "a08c58e4e7344d1ab8d1865c22a5f88c5e422954",
+        "rev": "7087cd2ba65e8980c98eb445b0892a70dec5416f",
         "type": "github"
       },
       "original": {
@@ -278,6 +278,29 @@
       }
     },
     "incl": {
+      "inputs": {
+        "nixlib": [
+          "std",
+          "dmerge",
+          "haumea",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1669263024,
+        "narHash": "sha256-E/+23NKtxAqYG/0ydYgxlgarKnxmDbg6rCMWnOBqn9Q=",
+        "owner": "divnix",
+        "repo": "incl",
+        "rev": "ce7bebaee048e4cd7ebdb4cee7885e00c4e2abca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "divnix",
+        "repo": "incl",
+        "type": "github"
+      }
+    },
+    "incl_2": {
       "inputs": {
         "nixlib": [
           "std",
@@ -385,11 +408,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1690370995,
-        "narHash": "sha256-9z//23jGegLJrf3ITStLwVf715O39dq5u48Kr/XW14U=",
+        "lastModified": 1690470004,
+        "narHash": "sha256-l57RmPhPz9r1LGDg/0v8bYgJO8R+GGTQZtkIxE7negU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f3fbbc36b4e179a5985b9ab12624e9dfe7989341",
+        "rev": "9462344318b376e157c94fa60c20a25b913b2381",
         "type": "github"
       },
       "original": {
@@ -535,6 +558,7 @@
       "inputs": {
         "hive": "hive",
         "home-manager": "home-manager_2",
+        "incl": "incl",
         "nixpkgs": "nixpkgs",
         "std": "std",
         "unstable": "unstable"
@@ -596,7 +620,7 @@
         "devshell": "devshell",
         "dmerge": "dmerge",
         "flake-utils": "flake-utils",
-        "incl": "incl",
+        "incl": "incl_2",
         "makes": [
           "std",
           "blank"
@@ -632,11 +656,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1690272529,
-        "narHash": "sha256-MakzcKXEdv/I4qJUtq/k/eG+rVmyOZLnYNC2w1mB59Y=",
+        "lastModified": 1690367991,
+        "narHash": "sha256-2VwOn1l8y6+cu7zjNE8MgeGJNNz1eat1HwHrINeogFA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ef99fa5c5ed624460217c31ac4271cfb5cb2502c",
+        "rev": "c9cf0708f00fbe553319258e48ca89ff9a413703",
         "type": "github"
       },
       "original": {

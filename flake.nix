@@ -22,28 +22,40 @@
       url = "github:divnix/std/release/0.23";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    incl = {
+      url = "github:divnix/incl";
+      inputs.nixlib.follows = "std/dmerge/haumea/nixpkgs";
+    };
   };
 
   outputs = {
     self,
     hive,
     std,
+    incl,
     ...
-  } @ inputs:
+  } @ inputs: let
+    nixpkgsConfig = {
+      allowUnfree = true;
+    };
+  in
     hive.growOn {
-      inherit inputs;
-      nixpkgsConfig = {
-        allowUnfree = true;
-      };
-      cellsFrom = ./nix;
+      inherit inputs nixpkgsConfig;
+      cellsFrom = incl ./nix ["repo"];
       cellBlocks = [
         (std.blockTypes.nixago "configs")
         (std.blockTypes.devshells "shells")
+      ];
+    }
+    (hive.grow {
+      inherit inputs nixpkgsConfig;
+      cellsFrom = incl ./nix ["core" "sshExample"];
+      cellBlocks = [
         hive.blockTypes.nixosModules
         hive.blockTypes.nixosProfiles
         hive.blockTypes.nixosConfigurations
       ];
-    }
+    })
     {
       nixosModules = hive.collect self "nixosModules";
       nixosProfiles = hive.collect self "nixosProfiles";
