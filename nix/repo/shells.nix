@@ -10,6 +10,8 @@ in
 
       imports = [inputs.std.std.devshellProfiles.default];
 
+      packages = [inputs.nixpkgs.nil];
+
       nixago = [
         inputs.std.lib.cfg.conform
         (inputs.std.lib.cfg.treefmt cell.configs.treefmt)

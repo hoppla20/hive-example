@@ -39,41 +39,39 @@
       allowUnfree = true;
     };
 
+    l = inputs.nixpkgs.lib // builtins;
+    blockTypes = l.attrsets.mergeAttrsList [std.blockTypes hive.blockTypes];
+
     collect =
       hive.collect
       // {
         renamer = cell: target: "${cell}_${target}";
       };
+
+    outputNixosModules = collect self "nixosModules";
+    outputNixosProfiles = collect self "nixosProfiles";
+    outputNixosConfigurations = collect self "nixosConfigurations";
   in
     hive.growOn {
-      inherit inputs nixpkgsConfig;
-      cellsFrom = incl ./nix ["repo"];
-      cellBlocks = [
-        (std.blockTypes.nixago "configs")
-        (std.blockTypes.devshells "shells")
-      ];
-    }
-    (hive.grow {
-      inherit inputs nixpkgsConfig;
-      cellsFrom = incl ./nix ["core" "sshExample"];
-      cellBlocks = [
-        hive.blockTypes.nixosModules
-        hive.blockTypes.nixosProfiles
-      ];
-    })
-    {
-      nixosModules = collect self "nixosModules";
-      nixosProfiles = collect self "nixosProfiles";
-    }
-    (hive.grow {
       inherit nixpkgsConfig;
-      inputs = inputs // {inherit (self) nixosModules nixosProfiles;};
-      cellsFrom = incl ./nix ["core"];
-      cellBlocks = [
-        hive.blockTypes.nixosConfigurations
+      inputs =
+        inputs
+        // {
+          nixosModules = outputNixosModules;
+          nixosProfiles = outputNixosProfiles;
+        };
+      cellsFrom = ./nix;
+      cellBlocks = with blockTypes; [
+        (nixago "configs")
+        (devshells "shells")
+        nixosModules
+        nixosProfiles
+        nixosConfigurations
       ];
-    })
+    }
     {
-      nixosConfigurations = collect self "nixosConfigurations";
+      nixosModules = outputNixosModules;
+      nixosProfiles = outputNixosProfiles;
+      nixosConfigurations = outputNixosConfigurations;
     };
 }
