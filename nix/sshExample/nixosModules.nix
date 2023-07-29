@@ -2,7 +2,7 @@
   inputs,
   cell,
 }: {
-  default = moduleName: {
+  default = renamer: moduleName: {
     lib,
     config,
     options,

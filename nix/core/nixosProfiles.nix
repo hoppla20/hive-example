@@ -2,7 +2,7 @@
   inputs,
   cell,
 }: {
-  default = targetName: {...}: {
-    bee.modules.${targetName "default"}.enable = true;
+  default = renamer: {...}: {
+    bee.modules.${renamer "default"}.enable = true;
   };
 }

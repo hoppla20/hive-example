@@ -2,8 +2,8 @@
   inputs,
   cell,
 }: {
-  default = targetName: {...}: {
-    bee.modules.${targetName "default"} = {
+  default = renamer: {...}: {
+    bee.modules.${renamer "default"} = {
       enable = true;
       openFirewall = true;
     };
